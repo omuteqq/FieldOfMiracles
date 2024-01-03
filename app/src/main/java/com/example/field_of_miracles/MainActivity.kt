@@ -65,9 +65,9 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            val words: Words = Words()
-            val findWord: findWord = findWord()
 
+            val words = Words()
+            val findWord = findWord()
 
         val navController = rememberNavController()
 
