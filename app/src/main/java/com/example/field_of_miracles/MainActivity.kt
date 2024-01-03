@@ -187,7 +187,6 @@ fun MainScreen(navController: NavController, mainWord: String, mainQuestion: Str
         mutableStateOf("")
     }
 
-    val arrayOfRepeatWord = mutableListOf<String>()
 
     var a by remember {
         mutableStateOf(repeat(mainWord.length) { text += " _ " })
@@ -406,19 +405,20 @@ fun MainScreen(navController: NavController, mainWord: String, mainQuestion: Str
                                 editText = "${textField} буква открыта \n" +
                                         "${counter % 3 + 1} Игрок крутите барабан"
                                 enabledTextField = false
-                                var newText = ""
-                                var j = 0
-                                while (j < text.length) {
+                                var j = 1
+                                val letter = mainWord[textField.toInt() - 1]
+                                val newText = text.toCharArray()
 
-                                    if (j == textField.toInt() * 3 - 2) {
-                                        newText += mainWord[textField.toInt() - 1]
-                                    } else {
-                                        newText += text[j]
+                                text.toCharArray()
+                                while (j <= mainWord.length) {
+                                    if (letter == mainWord[j-1]){
+                                        newText[(j*3)-2] = letter
                                     }
+
                                     j++
                                 }
-                                text = newText
 
+                                text = String(newText)
                                 if (text.contains("_") == false && textField != "") {
                                     enabledButton1 = false
                                     enabledButton2 = false
