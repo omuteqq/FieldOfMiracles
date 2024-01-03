@@ -1,41 +1,63 @@
 package com.example.field_of_miracles.useCases
 
+import com.example.field_of_miracles.data.Words
 import kotlin.random.Random
 
 class findWord {
+    val findIndex = findIndex()
+    val words = Words()
+    val index = findIndex.findWordIndex(words.arrayOfWords)
 
-    fun findWordExecute(words: List<String>, index:Int): String{
+    fun findWordExecute(words: List<String>): String{
         val word = words[index]
         return word
     }
 
-    fun findArrayOfLetters(word:String, letter: String): String {
-        var i = 0
+    fun isLetterInWord(word:String, letter: String): Boolean{
+        if (letter in word && letter  != ""){
+            return true
+        }
+        return false
+    }
+
+    fun findArrayOfLetters(word:String, letter: String, text: String): String {
+
         var j = 0
-        var k = 0
-        var str = ""
-        var arrayOfLetters = mutableListOf<String>()
+        var count = 0
+        val arrayOfWord = mutableListOf<String>()
+        var newText = ""
 
+        while (j < text.length){
+            arrayOfWord.add(text[j].toString())
+            j++
+        }
 
-            while (i < word.length) {
-                arrayOfLetters.add(i, " _ ")
-                i++
-            }
-
-
-        while(j<word.length){
-            if (word[j].toString() == letter) {
-                arrayOfLetters[j] = word[j].toString()
+        j = 0
+        while (j < word.length){
+            if (word[j].toString() == letter && arrayOfWord[j] != ""){
+                arrayOfWord.removeAt(j*3+1)
+                arrayOfWord.add(j*3+1, letter)
+                count++
             }
             j++
         }
 
-        while (k < arrayOfLetters.size){
-            str += arrayOfLetters[k]
-            k++
+        count = 0
+        j=0
+        while (j < arrayOfWord.size){
+            newText += arrayOfWord[j]
+            j++
         }
 
-        return str
+
+        return newText
+    }
+
+
+
+    fun findQuestionExecute(): String{
+        val question = Words()
+        return question.arrayQuestions[index]
     }
 
 }
