@@ -479,6 +479,9 @@ fun MainScreen(navController: NavController, mainWord: String, mainQuestion: Str
 
                         } else
                             if (textField != "") {
+                                if (textField.lowercase() !in "а".."я"){
+                                    editText = "Введите русскую букву"
+                                }else
 
                                 if (textField in text) {
                                     counter++
@@ -494,8 +497,8 @@ fun MainScreen(navController: NavController, mainWord: String, mainQuestion: Str
                                     ) {
 
                                         val newText = text
-                                        var count = 0
-                                        count = newText
+                                        var count = newText
+
                                             .filter { it.toString() == "_" }
                                             .count()
                                         text = findWord.findArrayOfLetters(
