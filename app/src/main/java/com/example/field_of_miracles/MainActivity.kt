@@ -6,7 +6,6 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -15,7 +14,6 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -36,7 +34,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.paint
 import androidx.compose.ui.graphics.Color
@@ -51,7 +48,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -73,7 +69,7 @@ class MainActivity : ComponentActivity() {
 
         NavHost(navController, startDestination = "welcome") {
             composable("welcome") { WelcomeScreen(navController) }
-            composable("mainScreen") { MainScreen(navController, findWord.findWordExecute(words.arrayOfWords), findWord.findQuestionExecute())}
+            composable("mainScreen") { MainScreen(findWord.findWordExecute(words.arrayOfWords), findWord.findQuestionExecute())}
         }
 
             val darkTheme = isSystemInDarkTheme()
@@ -151,12 +147,11 @@ fun WelcomeScreen(navController: NavController){
 }
 
 @Composable
-fun MainScreen(navController: NavController, mainWord: String, mainQuestion: String) {
+fun MainScreen(mainWord: String, mainQuestion: String) {
 
     // variables
     val findWord = findWord()
-    val words = Words()
-    val scores: Scores = Scores()
+    val scores = Scores()
     val findIndex = findIndex()
 
     var enabledTextField by remember {
@@ -188,9 +183,7 @@ fun MainScreen(navController: NavController, mainWord: String, mainQuestion: Str
     }
 
 
-    var a by remember {
-        mutableStateOf(repeat(mainWord.length) { text += " _ " })
-    }
+
 
     var counter by remember {
         mutableStateOf(0)
