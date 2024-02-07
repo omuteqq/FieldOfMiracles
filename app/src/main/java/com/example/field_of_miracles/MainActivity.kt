@@ -182,7 +182,9 @@ fun MainScreen(mainWord: String, mainQuestion: String) {
         mutableStateOf("")
     }
 
-
+    var a by remember {
+        mutableStateOf(repeat(mainWord.length) { text += " _ " })
+    }
 
 
     var counter by remember {
